@@ -22,16 +22,16 @@ width: 15%;
 
 .img-logo{
 
-border:2px solid white;
+border: 2px solid white;
 border-radius: 50%;
-padding:3px;
+padding: 3px;
 transition: 0.3s;
 
 }
 
 .img-logo:hover{
 
-border-color: black;
+border-color: #111;
 
 }
 
@@ -57,7 +57,8 @@ font-size: 0.8rem;
 
 .titles img {
 
- width: 40%;
+ width: 50%;
+ height: auto;
 
 }
 }
