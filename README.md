@@ -1,4 +1,4 @@
-s<p align="center">
+<p align="center">
   <img alt="MyLinks" src="./GitHub/Icon - Website.png" width="10%"> 
   </p>
 
