@@ -30,7 +30,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 🕵️‍♂️ Para clonar o repositório utilize:
 ```bash
- git clone hhttps://github.com/degabrielofi/MyLinks
+ git clone https://github.com/degabrielofi/MyLinks
 ```
 
 ## 👨🏻‍💻 Para instalar as dependências use o comando abaixo: 
