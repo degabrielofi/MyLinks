@@ -7,7 +7,7 @@ export const Menu = styled.div`
 font-weight: 700;  
 display: flex;
 justify-content: center;
-padding: 3rem;
+padding: 2rem;
 align-items: center;  
 flex-direction: column;
 color: #fff;
@@ -67,8 +67,6 @@ font-size: 0.8rem;
 
 export const Container = styled.div`
 
-
-
 .my-links {
 
 display: flex;
@@ -80,8 +78,8 @@ justify-content: center;
 
 display: grid;
 grid-template-columns: 1fr 1fr;
-gap: 0 2rem;
-width: 50%;
+gap: 0 3rem;
+width: 70%;
 text-align: center;
 
 }
@@ -89,26 +87,32 @@ text-align: center;
 .link a {
 
 transition: all 0.3s;
-color: white;
+color: #fff;
 text-decoration: none;
 
 }
 
 .link .link-a:hover {
 
-background: white;
-color: #0077ff;
+background: #fff;
+color: #111;
 
 }
 
 .link .link-a {
 
 position: relative;
-border-radius: 7px;
-border:2px solid white;
-padding:10px;
-margin:17px 0;
+border-radius: 0.5rem;
+border: 2px solid #fff;
+padding: 0.7rem;
+margin: 1rem 0;
 transition: 0.3s;
+
+}
+
+.link .link-a:hover {
+
+border: 2px solid #111;
 
 }
 
@@ -127,6 +131,20 @@ font-weight: normal;
 
 }
 
+.link .link-a .icon {
+
+width: 10px;
+color: #fff;
+
+}
+
+
+.link .link-a .icon_bot:hover {
+
+   color: #fff;
+     
+}
+
 .link a:hover {
 
 transform: scale(1.1);
@@ -136,16 +154,91 @@ transition: all 0.3s;
 
 @media screen and (max-width:768px) {
 
+.link .link-a h3 {
+
+font-weight: normal;
+font-size: 1.0rem;
+
+}
+
 .link {
 
  display: grid;
  grid-template-columns: 1fr;
  flex-direction: column;
- width: 80%;
+ width: 90%;
+
+}
+
+.link a:hover {
+
+transform: scale(1.05);
+transition: all 0.3s;
 
 }
 
 }
 
+
+`
+
+export const Links = styled.div`
+
+.sci {
+
+position: relative;
+top: auto;
+display: flex;
+justify-content: center;
+color: #111;
+transition: 0.5s all;
+margin: 1rem;
+
+}
+
+.sci a {
+
+list-style: none;
+color: #fff;
+font-size: 1.6em;
+margin: 0 1rem;
+transition: 0.5s all;
+
+
+}
+
+.sci a:not(:last-child) {
+
+margin-bottom: 15px;
+
+}
+
+.sci a:hover {
+
+transform: scale(1.3);
+transition: all 0.5s;
+
+}
+
+.sci .insta:hover {
+
+color: #b82ea7;
+transition: all 0.5s;
+
+}
+
+.sci .twitter:hover {
+
+color: #5BAFE8;
+transition: all 0.5s;
+
+}
+
+.sci .gmail:hover{
+
+    color: #dc4c41;
+    transition: all 0.5s;
+
+}
 
 `
