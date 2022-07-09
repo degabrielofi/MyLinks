@@ -7,7 +7,7 @@ export const Menu = styled.div`
 font-weight: 700;  
 display: flex;
 justify-content: center;
-padding: 2rem;
+padding: 1.5rem;
 align-items: center;  
 flex-direction: column;
 color: #fff;
@@ -22,7 +22,7 @@ width: 15%;
 
 .img-logo{
 
-border: 2px solid white;
+border: 2px solid #fff;
 border-radius: 50%;
 padding: 3px;
 transition: 0.3s;
@@ -121,7 +121,7 @@ border: 2px solid #111;
 position: absolute;
 left: 20px;
 line-height: 1;
-font-size: 23px;
+font-size: 1.5rem;
 
 }
 
@@ -130,14 +130,6 @@ font-size: 23px;
 font-weight: normal;
 
 }
-
-.link .link-a .icon {
-
-width: 10px;
-color: #fff;
-
-}
-
 
 .link .link-a .icon_bot:hover {
 
@@ -207,12 +199,6 @@ transition: 0.5s all;
 
 }
 
-.sci a:not(:last-child) {
-
-margin-bottom: 15px;
-
-}
-
 .sci a:hover {
 
 transform: scale(1.3);
@@ -234,10 +220,10 @@ transition: all 0.5s;
 
 }
 
-.sci .gmail:hover{
+.sci .discord:hover{
 
-    color: #dc4c41;
-    transition: all 0.5s;
+   color:#404eed;
+   transition: all 0.5s;
 
 }
 
