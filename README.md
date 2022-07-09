@@ -10,7 +10,7 @@ Abaixo podemos ver o resultado final da página. Espero que gostem!
 
 <br>
 <p align="center">
- 
+  <img alt="MyLinks" src="./GitHub/MyLinks.png" width="80%"> 
   </p>
 
 # 🔗 Acesse o site com o link abaixo. 
