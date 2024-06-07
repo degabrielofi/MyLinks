@@ -32,7 +32,6 @@ const Home = () => {
                 <div className='sci'>
                     <a href="https://www.instagram.com/degabrielofi_/" target="_black"><div className="insta"><i className="fab fa-instagram"></i></div></a>
                     <a href="https://discord.com/invite/TNMzEFyxA4" target="_black"><div className="discord"><i className='fab fa-discord'></i></div></a>
-                    <a href="https://www.twitter.com/degabrielofi" target="_black"><div className="twitter"><i className="fab fa-twitter"></i></div></a>
                 </div>
             </Links>
 
