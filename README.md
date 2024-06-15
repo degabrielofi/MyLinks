@@ -6,7 +6,7 @@
 
 O projeto abaixo é uma simples página, no qual foi feita para colocar os links de suas principais redes sociais, aonde você possa ajudar as pessoas que entram em alguma rede social sua, a encontrar outros links importantes, como o seu [Likedln](https://www.linkedin.com/in/degabrielofi/), [Github](https://github.com/degabrielofi) ou [Email](mailto:contatodegabrielofi@gmail.com) por exemplo.
 
-Abaixo podemos ver o resultado final da página. Espero que gostem!
+Veja abaixo o resultado do projeto:
 
 <br>
 <p align="center">
