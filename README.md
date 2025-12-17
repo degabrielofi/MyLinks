@@ -1,48 +1,77 @@
 <p align="center">
-  <img alt="MyLinks" src="./GitHub/Icon - Website.png" width="10%"> 
-  </p>
+  <img alt="MyLinks" src="./GitHub/Icon - Website.png" width="12%">
+</p>
 
-# :clipboard: Sobre o projeto
+<h1 align="center">MyLinks</h1>
 
-O projeto abaixo é uma simples página, no qual foi feita para colocar os links de suas principais redes sociais, aonde você possa ajudar as pessoas que entram em alguma rede social sua, a encontrar outros links importantes, como o seu [Likedln](https://www.linkedin.com/in/degabrielofi/), [Github](https://github.com/degabrielofi) ou [Email](mailto:contatodegabrielofi@gmail.com) por exemplo.
-
-Veja abaixo o resultado do projeto:
-
-<br>
 <p align="center">
-  <img alt="MyLinks" src="./GitHub/MyLinks.png" width="80%"> 
-  </p>
+  Página pessoal de links para centralizar redes sociais, contato e projetos.
+</p>
 
-# 🔗 Acesse o site com o link abaixo. 
+---
 
-- [MyLinks](https://mylinks-degabrielofi.vercel.app/)
+## 📌 Sobre o projeto
 
+**MyLinks** é uma página pessoal criada para centralizar os principais links profissionais e sociais em um único lugar.
 
-## :computer: Tecnologias utilizadas
-Este projeto foi desenvolvido com as seguintes tecnologias:
-- [React.js](https://pt-br.reactjs.org/)
-- [Node.js](https://nodejs.org/en/)
-- [JavaScript](https://www.javascript.com/)
-- [Styled-Components](https://styled-components.com/)
-- [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
-- [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
+O objetivo é facilitar o acesso a informações importantes, permitindo que qualquer pessoa que chegue por uma rede social consiga encontrar rapidamente links como **LinkedIn**, **GitHub**, **site pessoal** ou **email de contato**.
 
+Projeto simples, direto e focado em usabilidade.
 
-## 🕵️‍♂️ Para clonar o repositório utilize:
+---
+
+---
+
+## 🔗 Acesse o site
+
+👉 **[Gabriel Links](https://links.degabrielofi.com.br/)**
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+Este projeto foi desenvolvido utilizando:
+
+- **React.js**
+- **JavaScript**
+- **Node.js**
+- **Styled-components**
+- **HTML5**
+- **CSS3**
+
+---
+
+---
+
+## ▶️ Executando o projeto
+
 ```bash
- git clone https://github.com/degabrielofi/MyLinks
+npm start
 ```
 
-## 👨🏻‍💻 Para instalar as dependências use o comando abaixo: 
-```bash
- npm i styled-components react
+A aplicação será iniciada em ambiente de desenvolvimento.
+
+---
+
+## 🤝 Contribuição
+
+Sugestões, melhorias e feedbacks são sempre bem-vindos.
+Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+---
+
+## 👨🏻‍💻 Autor
+
+**Gabriel Pereira**
+
+- 🔗 [LinkedIn](https://www.linkedin.com/in/degabrielofi/)
+- 💻 [GitHub](https://github.com/degabrielofi)
+- ✉️ [Email](mailto:contatodegabrielofi@gmail.com)
+
+---
+
+<p align="center">
+  Feito com foco em simplicidade, clareza e propósito.
+</p>
 ```
-
-## 🌐 Para iniciarlizar o projeto utilize o comando abaixo:
-```bash
- npm start
-```
-
-## 
-
-## 😃 Gostou? Me siga no > [Likedln](https://www.linkedin.com/in/degabrielofi/)
+````
