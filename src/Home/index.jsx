@@ -126,7 +126,7 @@ export default function GabrielLinks() {
               </LinkRow>
 
               <LinkRow
-                href="https://degabrielofi.com.br"
+                href="https://portfolio.degabrielofi.com.br"
                 target="_blank"
                 rel="noreferrer"
               >
