@@ -1,19 +1,83 @@
-import styled from "styled-components";
+import styled, { keyframes, createGlobalStyle } from "styled-components";
 
+/* ─── THEME TOKENS via CSS variables (set on :root[data-theme]) ─── */
+export const ThemeTokens = createGlobalStyle`
+  :root[data-theme="dark"], :root:not([data-theme]) {
+    --bg-page:       radial-gradient(900px 600px at 12% 10%, rgba(66,21,101,.62), transparent 55%),
+                     radial-gradient(900px 600px at 90% 70%, rgba(0,200,255,.16), transparent 55%),
+                     linear-gradient(180deg, #05000b 0%, #12001f 55%, #05000b 100%);
+    --bg-body:       #05000b;
+    --text-primary:  #ffffff;
+    --text-muted:    rgba(255,255,255,0.72);
+    --text-subtle:   rgba(255,255,255,0.55);
+    --panel-bg:      rgba(255,255,255,0.06);
+    --panel-border:  rgba(255,255,255,0.12);
+    --panel-links-bg:rgba(255,255,255,0.09);
+    --link-bg:       rgba(255,255,255,0.06);
+    --link-border:   rgba(255,255,255,0.12);
+    --link-hover-bg: rgba(255,255,255,0.08);
+    --icon-bg:       rgba(255,255,255,0.08);
+    --icon-border:   rgba(255,255,255,0.14);
+    --toast-bg:      rgba(0,0,0,0.58);
+    --toast-border:  rgba(255,255,255,0.14);
+    --share-bg:      rgba(255,255,255,0.12);
+    --share-border:  rgba(255,255,255,0.18);
+    --toggle-bg:     rgba(255,255,255,0.1);
+    --toggle-border: rgba(255,255,255,0.18);
+    --toggle-icon:   #fff;
+    --skeleton-base: rgba(255,255,255,0.08);
+    --skeleton-shine:rgba(255,255,255,0.14);
+    --accent:        #7b3fe4;
+    --accent-glow:   rgba(114,46,209,0.25);
+  }
+
+  :root[data-theme="light"] {
+    --bg-page:       radial-gradient(900px 600px at 12% 10%, rgba(180,140,255,.18), transparent 55%),
+                     radial-gradient(900px 600px at 90% 70%, rgba(0,180,255,.10), transparent 55%),
+                     linear-gradient(180deg, #f3eeff 0%, #ece5ff 55%, #f3eeff 100%);
+    --bg-body:       #f3eeff;
+    --text-primary:  #1a0a30;
+    --text-muted:    rgba(30,10,60,0.70);
+    --text-subtle:   rgba(30,10,60,0.45);
+    --panel-bg:      rgba(255,255,255,0.72);
+    --panel-border:  rgba(114,46,209,0.14);
+    --panel-links-bg:rgba(255,255,255,0.88);
+    --link-bg:       rgba(255,255,255,0.70);
+    --link-border:   rgba(114,46,209,0.14);
+    --link-hover-bg: rgba(255,255,255,0.95);
+    --icon-bg:       rgba(114,46,209,0.08);
+    --icon-border:   rgba(114,46,209,0.18);
+    --toast-bg:      rgba(255,255,255,0.88);
+    --toast-border:  rgba(114,46,209,0.18);
+    --share-bg:      rgba(255,255,255,0.75);
+    --share-border:  rgba(114,46,209,0.22);
+    --toggle-bg:     rgba(114,46,209,0.10);
+    --toggle-border: rgba(114,46,209,0.22);
+    --toggle-icon:   #6f2dbd;
+    --skeleton-base: rgba(114,46,209,0.07);
+    --skeleton-shine:rgba(114,46,209,0.14);
+    --accent:        #6f2dbd;
+    --accent-glow:   rgba(114,46,209,0.18);
+  }
+`;
+
+/* ─── ANIMATIONS ─── */
+const fadeUp = keyframes`
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0);    }
+`;
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to   { opacity: 1; }
+`;
+
+/* ─── PAGE ─── */
 export const Page = styled.main`
   min-height: 100vh;
-  color: #fff;
-  background: radial-gradient(
-      900px 600px at 12% 10%,
-      rgba(66, 21, 101, 0.62),
-      transparent 55%
-    ),
-    radial-gradient(
-      900px 600px at 90% 70%,
-      rgba(0, 200, 255, 0.16),
-      transparent 55%
-    ),
-    linear-gradient(180deg, #05000b 0%, #12001f 55%, #05000b 100%);
+  color: var(--text-primary);
+  background: var(--bg-page);
+  transition: background 0.35s ease, color 0.35s ease;
 `;
 
 export const Shell = styled.div`
@@ -22,20 +86,19 @@ export const Shell = styled.div`
   padding: 1.2rem;
 `;
 
-/* HERO */
+/* ─── HERO ─── */
 export const TopHero = styled.section`
   position: relative;
   height: 320px;
   border-radius: 28px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 28px 120px rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  box-shadow: 0 28px 120px rgba(0, 0, 0, 0.35);
   margin-bottom: 1rem;
+  animation: ${fadeIn} 0.6s ease both;
 
-  @media (min-width: 900px) {
-    height: 340px;
-  }
+  @media (min-width: 900px) { height: 340px; }
 `;
 
 export const TopHeroImg = styled.img`
@@ -47,30 +110,19 @@ export const TopHeroImg = styled.img`
 export const TopHeroOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-      900px 420px at 20% 20%,
-      rgba(114, 46, 209, 0.28),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 420px at 85% 70%,
-      rgba(0, 200, 255, 0.18),
-      transparent 60%
-    ),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.82) 72%);
+  background: radial-gradient(900px 420px at 20% 20%, rgba(114,46,209,.28), transparent 60%),
+    radial-gradient(900px 420px at 85% 70%, rgba(0,200,255,.18), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.82) 72%);
 `;
 
 export const TopHeroContent = styled.div`
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
+  left: 0; right: 0; bottom: 0;
   display: flex;
   align-items: center;
   gap: 1rem;
-
   padding: 1.4rem;
+  animation: ${fadeUp} 0.65s 0.15s ease both;
 
   @media (min-width: 900px) {
     padding: 1.7rem 1.8rem;
@@ -78,19 +130,16 @@ export const TopHeroContent = styled.div`
   }
 `;
 
-/* AVATAR COM MOLDURA FORTE */
 export const Avatar = styled.img`
   width: 86px;
   height: 86px;
   border-radius: 26px;
   object-fit: cover;
-
   padding: 4px;
   background: linear-gradient(135deg, #421565, #7b3fe4);
-  border: 2px solid rgba(114, 46, 209, 0.9);
-
-  box-shadow: 0 0 0 4px rgba(114, 46, 209, 0.25),
-    0 18px 60px rgba(114, 46, 209, 0.35);
+  border: 2px solid rgba(114,46,209,0.9);
+  box-shadow: 0 0 0 4px var(--accent-glow), 0 18px 60px rgba(114,46,209,0.35);
+  flex: 0 0 auto;
 `;
 
 export const Headline = styled.h1`
@@ -98,12 +147,14 @@ export const Headline = styled.h1`
   font-weight: 950;
   letter-spacing: -0.9px;
   line-height: 1.05;
+  color: #fff;
 `;
 
 export const Subheadline = styled.p`
   margin-top: 0.35rem;
   opacity: 0.9;
   font-weight: 650;
+  color: #fff;
 `;
 
 export const MiniIntro = styled.p`
@@ -111,12 +162,14 @@ export const MiniIntro = styled.p`
   opacity: 0.82;
   line-height: 1.45;
   max-width: 680px;
+  color: #fff;
 `;
 
-/* LAYOUT */
+/* ─── LAYOUT ─── */
 export const Layout = styled.section`
   display: grid;
   gap: 1rem;
+  animation: ${fadeUp} 0.65s 0.28s ease both;
 
   @media (min-width: 1000px) {
     grid-template-columns: 0.95fr 1.05fr;
@@ -127,18 +180,15 @@ export const Layout = styled.section`
 export const Panel = styled.div`
   border-radius: 22px;
   padding: 1.15rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
   backdrop-filter: blur(16px);
+  transition: background 0.35s ease, border-color 0.35s ease;
 
   &[data-variant="links"] {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.09),
-      rgba(255, 255, 255, 0.05)
-    );
-    border-color: rgba(114, 46, 209, 0.25);
-    box-shadow: 0 22px 90px rgba(0, 0, 0, 0.35);
+    background: var(--panel-links-bg);
+    border-color: rgba(114,46,209,0.25);
+    box-shadow: 0 22px 90px rgba(0,0,0,.2);
   }
 `;
 
@@ -146,16 +196,19 @@ export const PanelTitle = styled.h2`
   font-size: 1.05rem;
   font-weight: 950;
   letter-spacing: -0.2px;
+  color: var(--text-primary);
+  transition: color 0.35s ease;
 `;
 
 export const PanelText = styled.p`
   margin-top: 0.55rem;
-  opacity: 0.72;
+  color: var(--text-muted);
   line-height: 1.5;
   font-size: 0.92rem;
+  transition: color 0.35s ease;
 `;
 
-/* LINKS */
+/* ─── LINKS ─── */
 export const LinkList = styled.div`
   margin-top: 1rem;
   display: grid;
@@ -168,51 +221,43 @@ export const LinkRow = styled.a`
   align-items: center;
   justify-content: space-between;
   gap: 0.9rem;
-
   padding: 0.95rem 1rem;
   border-radius: 18px;
   text-decoration: none;
-  color: #fff;
-
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  background: var(--link-bg);
+  border: 1px solid var(--link-border);
   transition: transform 0.18s ease, box-shadow 0.18s ease,
-    border-color 0.18s ease, background 0.18s ease;
+              border-color 0.18s ease, background 0.18s ease;
 
   &:after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(
-      120deg,
-      transparent 20%,
-      rgba(255, 255, 255, 0.18),
-      transparent 60%
-    );
+    background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.18), transparent 60%);
     transform: translateX(-70%);
     opacity: 0;
     transition: transform 0.35s ease, opacity 0.35s ease;
     pointer-events: none;
   }
 
-  /* ROXO GUEBLY REAL */
   &[data-variant="primary"] {
     background: linear-gradient(135deg, #421565, #6f2dbd);
-    border-color: rgba(114, 46, 209, 0.55);
+    border-color: rgba(114,46,209,0.55);
+    color: #fff;
   }
 
   &:hover {
     transform: translateY(-2px);
-    border-color: rgba(114, 46, 209, 0.55);
-    box-shadow: 0 16px 55px rgba(114, 46, 209, 0.16);
-    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(114,46,209,0.55);
+    box-shadow: 0 16px 55px var(--accent-glow);
+    background: var(--link-hover-bg);
   }
 
-  &:hover:after {
-    transform: translateX(0%);
-    opacity: 1;
-  }
+  &:hover:after { transform: translateX(0%); opacity: 1; }
+
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
 export const LinkLeft = styled.div`
@@ -226,8 +271,8 @@ export const LinkIconImg = styled.img`
   height: 40px;
   border-radius: 12px;
   object-fit: cover;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--icon-border);
+  background: var(--icon-bg);
   flex: 0 0 auto;
 `;
 
@@ -238,32 +283,34 @@ export const IconCircle = styled.div`
   display: grid;
   place-items: center;
   font-size: 1.15rem;
-
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-
-  svg {
-    opacity: 0.92;
-  }
+  background: var(--icon-bg);
+  border: 1px solid var(--icon-border);
+  color: var(--text-primary);
+  flex: 0 0 auto;
+  transition: background 0.35s ease, border-color 0.35s ease;
+  svg { opacity: 0.92; }
 `;
 
 export const LinkMain = styled.div`
   font-weight: 950;
   letter-spacing: -0.2px;
+  color: inherit;
 `;
 
 export const LinkSub = styled.div`
   margin-top: 0.2rem;
   font-size: 0.82rem;
   opacity: 0.66;
+  color: inherit;
 `;
 
 export const LinkArrow = styled.div`
   font-weight: 950;
   opacity: 0.65;
+  color: inherit;
 `;
 
-/* EMPRESAS — HERO LARGO EM COLUNA (NADA DE QUADRADO) */
+/* ─── COMPANIES ─── */
 export const CompaniesGrid = styled.div`
   margin-top: 1rem;
   display: flex;
@@ -276,24 +323,24 @@ export const CompanyHeroCard = styled.a`
   width: 100%;
   border-radius: 26px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
   height: 260px;
   text-decoration: none;
   color: #fff;
   display: block;
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 22px 70px rgba(0,0,0,.3);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(114, 46, 209, 0.45);
-    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+    border-color: rgba(114,46,209,0.45);
+    box-shadow: 0 28px 90px rgba(0,0,0,.4);
   }
 
-  @media (max-width: 520px) {
-    height: 220px;
-  }
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @media (max-width: 520px) { height: 220px; }
 `;
 
 export const CompanyHeroImg = styled.img`
@@ -306,19 +353,13 @@ export const CompanyHeroImg = styled.img`
 export const CompanyHeroOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-      650px 320px at 18% 25%,
-      rgba(114, 46, 209, 0.22),
-      transparent 60%
-    ),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.84) 78%);
+  background: radial-gradient(650px 320px at 18% 25%, rgba(114,46,209,.22), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.84) 78%);
 `;
 
 export const CompanyHeroContent = styled.div`
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 0; right: 0; bottom: 0;
   padding: 1.1rem 1.1rem 1rem;
 `;
 
@@ -326,6 +367,7 @@ export const CompanyName = styled.div`
   font-weight: 950;
   letter-spacing: -0.2px;
   font-size: 1.05rem;
+  color: #fff;
 `;
 
 export const CompanyDesc = styled.div`
@@ -333,46 +375,69 @@ export const CompanyDesc = styled.div`
   opacity: 0.78;
   font-size: 0.9rem;
   line-height: 1.35;
+  color: #fff;
 `;
 
-/* FOOTER */
+/* ─── FOOTER ─── */
 export const Footer = styled.footer`
   text-align: center;
   margin-top: 1.1rem;
-  opacity: 0.55;
+  color: var(--text-subtle);
   font-size: 0.75rem;
+  transition: color 0.35s ease;
 `;
 
-/* SHARE — DISCRETO E BONITO */
+/* ─── THEME TOGGLE ─── */
+export const ThemeToggle = styled.button`
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 25;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  color: var(--toggle-icon);
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0,0,0,.25);
+  transition: transform 0.18s ease, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+
+  &:hover { transform: scale(1.1); }
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+`;
+
+/* ─── SHARE ─── */
 export const ShareFloating = styled.button`
   position: fixed;
   right: 18px;
   bottom: 18px;
   z-index: 25;
-
   padding: 0.65rem 0.9rem;
   border-radius: 999px;
   font-weight: 650;
   font-size: 0.85rem;
-  color: #fff;
-
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-primary);
+  background: var(--share-bg);
+  border: 1px solid var(--share-border);
   backdrop-filter: blur(12px);
   cursor: pointer;
-
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
-  transition: transform 0.18s ease, background 0.18s ease,
-    border-color 0.18s ease;
+  box-shadow: 0 18px 60px rgba(0,0,0,.3);
+  transition: transform 0.18s ease, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 
   &:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(114, 46, 209, 0.35);
+    background: var(--link-hover-bg);
+    border-color: rgba(114,46,209,0.35);
   }
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
-/* TOAST */
+/* ─── TOAST ─── */
 export const Toast = styled.div`
   position: fixed;
   left: 12px;
@@ -380,43 +445,44 @@ export const Toast = styled.div`
   bottom: 18px;
   max-width: 760px;
   margin: 0 auto;
-
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
-
   padding: 0.95rem 1rem;
   border-radius: 18px;
-
-  background: rgba(0, 0, 0, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: var(--toast-bg);
+  border: 1px solid var(--toast-border);
   backdrop-filter: blur(14px);
-  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 24px 90px rgba(0,0,0,.35);
+  animation: ${fadeUp} 0.4s ease both;
+  transition: background 0.35s ease, border-color 0.35s ease;
 `;
 
 export const ToastTitle = styled.div`
   font-weight: 950;
   letter-spacing: -0.2px;
+  color: var(--text-primary);
+  transition: color 0.35s ease;
 `;
 
 export const ToastText = styled.div`
   margin-top: 0.2rem;
-  opacity: 0.8;
+  color: var(--text-muted);
   font-size: 0.88rem;
   line-height: 1.35;
+  transition: color 0.35s ease;
 `;
 
 export const ToastClose = styled.button`
   cursor: pointer;
-  color: #fff;
+  color: var(--text-primary);
   opacity: 0.75;
   border: 0;
   background: transparent;
   font-size: 1rem;
   padding: 0.2rem 0.35rem;
+  transition: color 0.35s ease;
 
-  &:hover {
-    opacity: 1;
-  }
+  &:hover { opacity: 1; }
 `;

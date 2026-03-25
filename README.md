@@ -1,77 +1,84 @@
-<p align="center">
-  <img alt="MyLinks" src="./GitHub/Icon - Website.png" width="12%">
-</p>
+# MyLinks — Gabriel Pereira
 
-<h1 align="center">MyLinks</h1>
+> Página de links oficiais do Gabriel Pereira, Founder & CEO da [Guebly](https://guebly.com.br).
 
-<p align="center">
-  Página pessoal de links para centralizar redes sociais, contato e projetos.
-</p>
+![Preview do site](./GitHub/MyLinks.png)
 
----
+## ✨ Features
 
-## 📌 Sobre o projeto
+| Feature | Descrição |
+|---|---|
+| **Dark / Light Mode** | Toggle manual + respeita `prefers-color-scheme` do sistema. Preferência salva no `localStorage`. |
+| **Skeleton Loading** | Imagens hero das empresas exibem shimmer animado enquanto carregam — sem layout shift. |
+| **Analytics de cliques** | Cada link rastreia cliques (id, label, count, lastClick) no `localStorage` sem dependências externas. |
+| **Animações de entrada** | `fadeIn` no hero e `fadeUp` escalonado nos panels via `@keyframes` do styled-components. |
+| **SEO / Open Graph** | Meta tags completas: description, og:title, og:image, og:locale, twitter:card. Pronto para compartilhamento em qualquer rede. |
+| **Acessibilidade** | `aria-label` em todos os links e botões, `aria-hidden` em ícones decorativos, `role="status"` no toast, `focus-visible` outline em todos os interativos. |
+| **Compartilhar** | Web Share API nativa (mobile) com fallback para clipboard (desktop). |
 
-**MyLinks** é uma página pessoal criada para centralizar os principais links profissionais e sociais em um único lugar.
+## 🗂 Estrutura
 
-O objetivo é facilitar o acesso a informações importantes, permitindo que qualquer pessoa que chegue por uma rede social consiga encontrar rapidamente links como **LinkedIn**, **GitHub**, **site pessoal** ou **email de contato**.
+```
+src/
+├── context/
+│   └── ThemeContext.jsx      # Context + Provider para dark/light mode
+├── hooks/
+│   └── useAnalytics.js       # Hook de tracking de cliques (localStorage)
+├── components/
+│   └── LazyImage.jsx         # Wrapper de <img> com skeleton shimmer
+├── Home/
+│   ├── index.jsx             # Componente principal da página
+│   └── style.jsx             # Todos os styled-components + CSS variables de tema
+├── assets/                   # Imagens (hero, avatar, ícones)
+├── global.css                # Reset + body theming
+└── index.js                  # Entry point (React root + ThemeProvider)
+public/
+└── index.html                # Meta tags SEO, OG, Twitter Card, fontes
+```
 
-Projeto simples, direto e focado em usabilidade.
+## 🎨 Temas
 
----
+As cores são definidas via CSS custom properties no `style.jsx` (`ThemeTokens` global style):
 
----
+```css
+/* Dark (padrão / sistema) */
+:root[data-theme="dark"] { --bg-page: ...; --text-primary: #fff; ... }
 
-## 🔗 Acesse o site
+/* Light */
+:root[data-theme="light"] { --bg-page: ...; --text-primary: #1a0a30; ... }
+```
 
-👉 **[Gabriel Links](https://links.degabrielofi.com.br/)**
+O atributo `data-theme` é setado em `document.documentElement` pelo `ThemeContext`.
 
----
+## 📊 Analytics local
 
-## 🛠️ Tecnologias utilizadas
+Os cliques ficam em `localStorage["mylinks-analytics"]`:
 
-Este projeto foi desenvolvido utilizando:
+```json
+{
+  "guebly_holding": { "label": "Guebly Holding", "count": 3, "lastClick": "2024-01-15T10:30:00.000Z" },
+  "linkedin":       { "label": "LinkedIn",        "count": 1, "lastClick": "2024-01-15T10:31:00.000Z" }
+}
+```
 
-- **React.js**
-- **JavaScript**
-- **Node.js**
-- **Styled-components**
-- **HTML5**
-- **CSS3**
+Para integrar com Plausible ou outra ferramenta, basta editar `src/hooks/useAnalytics.js`.
 
----
-
----
-
-## ▶️ Executando o projeto
+## 🚀 Rodando localmente
 
 ```bash
+npm install
 npm start
 ```
 
-A aplicação será iniciada em ambiente de desenvolvimento.
+## 🏗 Build de produção
 
----
-
-## 🤝 Contribuição
-
-Sugestões, melhorias e feedbacks são sempre bem-vindos.
-Sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
----
-
-## 👨🏻‍💻 Autor
-
-**Gabriel Pereira**
-
-- 🔗 [LinkedIn](https://www.linkedin.com/in/degabrielofi/)
-- 💻 [GitHub](https://github.com/degabrielofi)
-- ✉️ [Email](mailto:contatodegabrielofi@gmail.com)
-
----
-
-<p align="center">
-  Feito com foco em simplicidade, clareza e propósito.
-</p>
+```bash
+npm run build
 ```
-````
+
+## 🛠 Stack
+
+- React 18
+- styled-components 5
+- react-icons 5
+- Create React App
