@@ -25,7 +25,6 @@ import {
   LinkArrow,
   CompaniesGrid,
   CompanyHeroCard,
-  CompanyHeroImg,
   CompanyHeroOverlay,
   CompanyHeroContent,
   CompanyName,
