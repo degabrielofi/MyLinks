@@ -109,6 +109,16 @@ export default function GabrielLinks() {
     }
   }, [locale]);
 
+  // Preload do hero image para LCP mais rápido
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = GueblyHero;
+    document.head.appendChild(link);
+    return () => document.head.removeChild(link);
+  }, []);
+
   // Toast apenas na primeira visita
   useEffect(() => {
     try {
