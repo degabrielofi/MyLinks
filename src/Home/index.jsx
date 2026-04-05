@@ -198,7 +198,7 @@ export default function GabrielLinks() {
                 </LinkRow>
 
                 <LinkRow
-                  href="https://portfolio.degabrielofi.com.br"
+                  href="https://me.degabrielofi.com.br"
                   target="_blank"
                   rel="noreferrer"
                   aria-label={t.ariaPersonal}
