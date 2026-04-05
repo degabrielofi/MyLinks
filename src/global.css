@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -10,7 +11,6 @@ body {
   transition: background 0.35s ease;
 }
 
-/* Garante que o body acompanha o tema */
 :root[data-theme="dark"] body,
 :root:not([data-theme]) body {
   background: #05000b;
@@ -20,4 +20,13 @@ body {
 :root[data-theme="light"] body {
   background: #f3eeff;
   color: #1a0a30;
+}
+
+/* Respeita preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

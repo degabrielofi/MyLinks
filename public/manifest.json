@@ -1,0 +1,18 @@
+{
+  "name": "Gabriel Pereira",
+  "short_name": "Gabriel",
+  "description": "Links oficiais — Gabriel Pereira, Founder & CEO @ Guebly",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#05000b",
+  "theme_color": "#12001f",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

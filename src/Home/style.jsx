@@ -1,6 +1,6 @@
 import styled, { keyframes, createGlobalStyle } from "styled-components";
 
-/* ─── THEME TOKENS via CSS variables ─── */
+/* ─── THEME TOKENS ─── */
 export const ThemeTokens = createGlobalStyle`
   :root[data-theme="dark"], :root:not([data-theme]) {
     --bg-page:               radial-gradient(900px 600px at 12% 10%, rgba(66,21,101,.62), transparent 55%),
@@ -64,12 +64,17 @@ export const ThemeTokens = createGlobalStyle`
 /* ─── ANIMATIONS ─── */
 const fadeUp = keyframes`
   from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0);    }
+  to   { opacity: 1; transform: translateY(0); }
 `;
 
 const fadeIn = keyframes`
   from { opacity: 0; }
   to   { opacity: 1; }
+`;
+
+const fadeDown = keyframes`
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(12px); }
 `;
 
 const bgDrift = keyframes`
@@ -78,7 +83,7 @@ const bgDrift = keyframes`
   100% { opacity: 0.6; transform: translate(0, 0) scale(1); }
 `;
 
-/* ─── ANIMATED BACKGROUND GLOW (dark mode only) ─── */
+/* ─── ANIMATED BACKGROUND GLOW ─── */
 export const PageGlow = styled.div`
   position: fixed;
   top: -25%;
@@ -122,7 +127,7 @@ export const TopHero = styled.section`
   overflow: hidden;
   border: 1px solid var(--panel-border);
   background: var(--panel-bg);
-  box-shadow: 0 28px 120px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 28px 120px rgba(0,0,0,0.35);
   margin-bottom: 1rem;
   animation: ${fadeIn} 0.6s ease both;
 
@@ -169,6 +174,12 @@ export const Avatar = styled.img`
   box-shadow: 0 0 0 4px var(--accent-glow), 0 18px 60px rgba(114,46,209,0.35);
   flex: 0 0 auto;
   animation: ${fadeUp} 0.55s 0.08s ease both;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+
+  &:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 6px var(--accent-glow), 0 22px 70px rgba(114,46,209,0.5);
+  }
 `;
 
 export const Headline = styled.h1`
@@ -178,15 +189,13 @@ export const Headline = styled.h1`
   line-height: 1.05;
   color: #fff;
 
-  @media (min-width: 900px) {
-    font-size: 2.85rem;
-  }
+  @media (min-width: 900px) { font-size: 2.85rem; }
 `;
 
 export const Subheadline = styled.p`
   margin-top: 0.35rem;
   opacity: 0.9;
-  font-weight: 650;
+  font-weight: 700;
   color: #fff;
 `;
 
@@ -260,8 +269,18 @@ export const LinkRow = styled.a`
   color: var(--text-primary);
   background: var(--link-bg);
   border: 1px solid var(--link-border);
+  opacity: 0;
+  animation: ${fadeUp} 0.4s ease both;
   transition: transform 0.18s ease, box-shadow 0.18s ease,
               border-color 0.18s ease, background 0.18s ease;
+
+  /* Stagger de entrada */
+  &:nth-child(1) { animation-delay: 0.50s; }
+  &:nth-child(2) { animation-delay: 0.56s; }
+  &:nth-child(3) { animation-delay: 0.62s; }
+  &:nth-child(4) { animation-delay: 0.68s; }
+  &:nth-child(5) { animation-delay: 0.74s; }
+  &:nth-child(6) { animation-delay: 0.80s; }
 
   &:after {
     content: "";
@@ -289,9 +308,7 @@ export const LinkRow = styled.a`
   }
 
   &:hover:after { transform: translateX(0%); opacity: 1; }
-
   &:active { transform: translateY(1px); box-shadow: none; }
-
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
@@ -374,9 +391,17 @@ export const CompanyHeroCard = styled.a`
   color: #fff;
   display: block;
   box-shadow: 0 22px 70px rgba(0,0,0,.3);
+  opacity: 0;
+  animation: ${fadeUp} 0.4s ease both;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
-  /* Arrow indicator — always visible on mobile, stronger on hover */
+  /* Stagger de entrada */
+  &:nth-child(1) { animation-delay: 0.50s; }
+  &:nth-child(2) { animation-delay: 0.58s; }
+  &:nth-child(3) { animation-delay: 0.66s; }
+  &:nth-child(4) { animation-delay: 0.74s; }
+
+  /* Indicador de link — visível no mobile, mais forte no hover */
   &::after {
     content: "↗";
     position: absolute;
@@ -396,10 +421,8 @@ export const CompanyHeroCard = styled.a`
   }
 
   &:hover::after { opacity: 1; transform: translate(2px, -2px); }
-
   &:active { transform: translateY(1px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
   &:active::after { opacity: 0.5; transform: none; }
-
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   @media (max-width: 520px) { height: 220px; }
@@ -452,85 +475,60 @@ export const Footer = styled.footer`
   transition: color 0.35s ease, border-color 0.35s ease;
 `;
 
-/* ─── THEME TOGGLE ─── */
-export const ThemeToggle = styled.button`
+/* ─── FLOATING BUTTONS (base compartilhada) ─── */
+const floatingBase = `
   position: fixed;
-  left: 18px;
-  bottom: 18px;
   z-index: 25;
-  width: 42px;
   height: 42px;
   border-radius: 999px;
-  display: grid;
-  place-items: center;
-  font-size: 1.1rem;
-  color: var(--toggle-icon);
-  background: var(--toggle-bg);
-  border: 1px solid var(--toggle-border);
-  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  backdrop-filter: blur(12px);
   box-shadow: 0 8px 32px rgba(0,0,0,.25);
-  transition: transform 0.18s ease, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+  border: 1px solid var(--toggle-border);
+  background: var(--toggle-bg);
+  color: var(--toggle-icon);
+  transition: transform 0.18s ease, background 0.35s ease,
+              border-color 0.35s ease, color 0.35s ease;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+`;
+
+export const ThemeToggle = styled.button`
+  ${floatingBase}
+  left: 18px;
+  width: 42px;
+  font-size: 1.1rem;
 
   &:hover { transform: scale(1.1); }
   &:active { transform: scale(0.92) rotate(18deg); }
-  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
-/* ─── LOCALE TOGGLE ─── */
 export const LocaleToggle = styled.button`
-  position: fixed;
+  ${floatingBase}
   left: 70px;
-  bottom: 18px;
-  z-index: 25;
   padding: 0 0.75rem;
-  height: 42px;
-  border-radius: 999px;
   font-weight: 700;
   font-size: 0.78rem;
   letter-spacing: 0.3px;
-  color: var(--toggle-icon);
-  background: var(--toggle-bg);
-  border: 1px solid var(--toggle-border);
-  backdrop-filter: blur(12px);
-  cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0,0,0,.25);
-  transition: transform 0.18s ease, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 
   &:hover { transform: scale(1.06); }
   &:active { transform: scale(0.94); }
-  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
-/* ─── SHARE ─── */
 export const ShareFloating = styled.button`
-  position: fixed;
+  ${floatingBase}
   right: 18px;
-  bottom: 18px;
-  z-index: 25;
-  height: 42px;
   padding: 0 1rem;
-  border-radius: 999px;
+  gap: 0.4rem;
   font-weight: 700;
   font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--toggle-icon);
-  background: var(--toggle-bg);
-  border: 1px solid var(--toggle-border);
-  backdrop-filter: blur(12px);
-  cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0,0,0,.25);
-  transition: transform 0.18s ease, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 
-  &:hover {
-    transform: translateY(-2px);
-    background: var(--link-hover-bg);
-    border-color: rgba(114,46,209,0.35);
-  }
+  &:hover { transform: translateY(-2px); border-color: rgba(114,46,209,0.35); }
   &:active { transform: translateY(1px); }
-  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
 /* ─── TOAST ─── */
@@ -538,7 +536,7 @@ export const Toast = styled.div`
   position: fixed;
   left: 12px;
   right: 12px;
-  bottom: 78px;
+  bottom: calc(78px + env(safe-area-inset-bottom));
   max-width: 760px;
   margin: 0 auto;
   display: flex;
@@ -551,8 +549,13 @@ export const Toast = styled.div`
   border: 1px solid var(--toast-border);
   backdrop-filter: blur(14px);
   box-shadow: 0 24px 90px rgba(0,0,0,.35);
-  animation: ${fadeUp} 0.4s ease both;
   transition: background 0.35s ease, border-color 0.35s ease;
+  animation: ${fadeUp} 0.4s ease both;
+  z-index: 30;
+
+  &[data-closing="true"] {
+    animation: ${fadeDown} 0.28s ease both;
+  }
 `;
 
 export const ToastTitle = styled.div`
@@ -578,7 +581,8 @@ export const ToastClose = styled.button`
   background: transparent;
   font-size: 1rem;
   padding: 0.2rem 0.35rem;
-  transition: color 0.35s ease;
+  flex-shrink: 0;
+  transition: opacity 0.18s ease;
 
   &:hover { opacity: 1; }
 `;

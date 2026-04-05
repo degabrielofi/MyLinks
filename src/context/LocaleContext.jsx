@@ -3,13 +3,13 @@ import translations from "../i18n/translations";
 
 const LocaleContext = createContext();
 
+const PAGE_TITLE = "Gabriel Pereira — Founder @Guebly 💜";
+
 function detectLocale() {
   try {
     const saved = localStorage.getItem("mylinks-locale");
     if (saved && translations[saved]) return saved;
-  } catch {
-    // localStorage unavailable
-  }
+  } catch {}
   const lang = (
     navigator.language ||
     (navigator.languages && navigator.languages[0]) ||
@@ -27,16 +27,13 @@ export function LocaleProvider({ children }) {
   useEffect(() => {
     const langMap = { pt: "pt-BR", en: "en", es: "es", it: "it" };
     document.documentElement.setAttribute("lang", langMap[locale] || "en");
+    document.title = PAGE_TITLE;
   }, [locale]);
 
   function changeLocale(l) {
     if (!translations[l]) return;
     setLocale(l);
-    try {
-      localStorage.setItem("mylinks-locale", l);
-    } catch {
-      // silently fail
-    }
+    try { localStorage.setItem("mylinks-locale", l); } catch {}
   }
 
   const t = translations[locale] || translations.pt;

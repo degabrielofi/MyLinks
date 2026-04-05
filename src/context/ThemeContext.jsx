@@ -4,16 +4,20 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    const stored = localStorage.getItem("mylinks-theme");
-    if (stored) return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+    try {
+      const stored = localStorage.getItem("mylinks-theme");
+      if (stored) return stored;
+    } catch {}
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   });
 
   useEffect(() => {
-    localStorage.setItem("mylinks-theme", theme);
+    try { localStorage.setItem("mylinks-theme", theme); } catch {}
     document.documentElement.setAttribute("data-theme", theme);
+
+    // Atualiza theme-color da barra do navegador mobile
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#12001f" : "#f3eeff");
   }, [theme]);
 
   const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));

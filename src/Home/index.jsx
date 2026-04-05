@@ -50,33 +50,56 @@ import LazyImage from "../components/LazyImage";
 
 import Profile from "../assets/profile.png";
 import GueblyHero from "../assets/guebly.png";
-
 import HoldingIcon from "../assets/icons/holding.png";
 import PersonalIcon from "../assets/icons/degabrielofi.png";
-
 import StudioHero from "../assets/studio.png";
 import ContabilHero from "../assets/contabil.png";
 import PayHero from "../assets/pay.png";
 import GamesHero from "../assets/games.png";
 
+const TOAST_DURATION = 3500;
+const TOAST_CLOSE_DURATION = 280;
+
 export default function GabrielLinks() {
-  const [toastOpen, setToastOpen] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastClosing, setToastClosing] = useState(false);
+  const [toastType, setToastType] = useState("welcome");
   const [fading, setFading] = useState(false);
+
   const { theme, toggle } = useTheme();
   const { t, locale, changeLocale } = useLocale();
   const { track } = useAnalytics();
+
   const prevLocale = useRef(locale);
+  const toastTimer = useRef(null);
 
   const localeOrder = ["pt", "en", "es", "it"];
   const localeLabels = { pt: "PT", en: "EN", es: "ES", it: "IT" };
   const localeTitles = { pt: "Português", en: "English", es: "Español", it: "Italiano" };
+
+  function openToast(type) {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToastType(type);
+    setToastClosing(false);
+    setToastVisible(true);
+    toastTimer.current = setTimeout(() => closeToast(), TOAST_DURATION);
+  }
+
+  function closeToast() {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToastClosing(true);
+    setTimeout(() => {
+      setToastVisible(false);
+      setToastClosing(false);
+    }, TOAST_CLOSE_DURATION);
+  }
 
   function cycleLocale() {
     const next = localeOrder[(localeOrder.indexOf(locale) + 1) % localeOrder.length];
     changeLocale(next);
   }
 
-  // Fade content on locale change
+  // Fade ao trocar idioma
   useEffect(() => {
     if (prevLocale.current !== locale) {
       setFading(true);
@@ -86,20 +109,16 @@ export default function GabrielLinks() {
     }
   }, [locale]);
 
-  // Show toast only on first visit
+  // Toast apenas na primeira visita
   useEffect(() => {
     try {
-      const visited = localStorage.getItem("mylinks-visited");
-      if (!visited) {
-        setToastOpen(true);
+      if (!localStorage.getItem("mylinks-visited")) {
         localStorage.setItem("mylinks-visited", "1");
-        const timer = setTimeout(() => setToastOpen(false), 3500);
-        return () => clearTimeout(timer);
+        openToast("welcome");
       }
-    } catch {
-      // localStorage unavailable
-    }
-  }, []);
+    } catch {}
+    return () => { if (toastTimer.current) clearTimeout(toastTimer.current); };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleShare() {
     track("share_button", "Compartilhar");
@@ -113,13 +132,15 @@ export default function GabrielLinks() {
         await navigator.share(shareData);
       } else {
         await navigator.clipboard.writeText(shareData.url);
-        setToastOpen(true);
-        setTimeout(() => setToastOpen(false), 3500);
+        openToast("copied");
       }
-    } catch {
-      // user cancelled or clipboard failed
-    }
+    } catch {}
   }
+
+  const toastContent = {
+    welcome: { title: t.toastTitle, text: t.toastText },
+    copied:  { title: t.toastCopiedTitle, text: t.toastCopiedText },
+  };
 
   return (
     <>
@@ -132,7 +153,6 @@ export default function GabrielLinks() {
           <TopHero>
             <TopHeroImg src={GueblyHero} alt="Guebly — banner do site" />
             <TopHeroOverlay />
-
             <TopHeroContent>
               <Avatar src={Profile} alt="Foto de Gabriel Pereira" />
               <div>
@@ -148,7 +168,6 @@ export default function GabrielLinks() {
             <Panel data-variant="links">
               <PanelTitle>{t.linksTitle}</PanelTitle>
               <PanelText>{t.linksText}</PanelText>
-
               <LinkList>
                 <LinkRow
                   href="https://guebly.com.br"
@@ -191,9 +210,7 @@ export default function GabrielLinks() {
                   onClick={() => track("email", "Email profissional")}
                 >
                   <LinkLeft>
-                    <IconCircle aria-hidden="true">
-                      <HiOutlineMail />
-                    </IconCircle>
+                    <IconCircle aria-hidden="true"><HiOutlineMail /></IconCircle>
                     <div>
                       <LinkMain>{t.emailMain}</LinkMain>
                       <LinkSub>gabriel@guebly.com.br</LinkSub>
@@ -205,14 +222,12 @@ export default function GabrielLinks() {
                 <LinkRow
                   href="https://github.com/degabrielofi"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer me"
                   aria-label={t.ariaGithub}
                   onClick={() => track("github", "GitHub")}
                 >
                   <LinkLeft>
-                    <IconCircle aria-hidden="true">
-                      <FaGithub />
-                    </IconCircle>
+                    <IconCircle aria-hidden="true"><FaGithub /></IconCircle>
                     <div>
                       <LinkMain>{t.githubMain}</LinkMain>
                       <LinkSub>{t.githubSub}</LinkSub>
@@ -224,14 +239,12 @@ export default function GabrielLinks() {
                 <LinkRow
                   href="https://www.linkedin.com/in/degabrielofi/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer me"
                   aria-label={t.ariaLinkedin}
                   onClick={() => track("linkedin", "LinkedIn")}
                 >
                   <LinkLeft>
-                    <IconCircle aria-hidden="true">
-                      <FaLinkedinIn />
-                    </IconCircle>
+                    <IconCircle aria-hidden="true"><FaLinkedinIn /></IconCircle>
                     <div>
                       <LinkMain>{t.linkedinMain}</LinkMain>
                       <LinkSub>{t.linkedinSub}</LinkSub>
@@ -243,14 +256,12 @@ export default function GabrielLinks() {
                 <LinkRow
                   href="https://www.instagram.com/degabrielofi_/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer me"
                   aria-label={t.ariaInstagram}
                   onClick={() => track("instagram", "Instagram")}
                 >
                   <LinkLeft>
-                    <IconCircle aria-hidden="true">
-                      <FaInstagram />
-                    </IconCircle>
+                    <IconCircle aria-hidden="true"><FaInstagram /></IconCircle>
                     <div>
                       <LinkMain>{t.instagramMain}</LinkMain>
                       <LinkSub>{t.instagramSub}</LinkSub>
@@ -265,7 +276,6 @@ export default function GabrielLinks() {
             <Panel data-variant="companies">
               <PanelTitle>{t.companiesTitle}</PanelTitle>
               <PanelText>{t.companiesText}</PanelText>
-
               <CompaniesGrid>
                 <CompanyHeroCard
                   href="https://studio.guebly.com.br"
@@ -333,17 +343,12 @@ export default function GabrielLinks() {
           <Footer>© {new Date().getFullYear()} — {t.footer}</Footer>
         </Shell>
 
-        {/* LOCALE TOGGLE */}
-        <LocaleToggle
-          type="button"
-          onClick={cycleLocale}
-          aria-label="Mudar idioma"
-          title={localeTitles[locale]}
-        >
+        {/* LOCALE */}
+        <LocaleToggle type="button" onClick={cycleLocale} aria-label="Mudar idioma" title={localeTitles[locale]}>
           {localeLabels[locale]}
         </LocaleToggle>
 
-        {/* DARK/LIGHT TOGGLE */}
+        {/* TEMA */}
         <ThemeToggle
           type="button"
           onClick={toggle}
@@ -360,15 +365,13 @@ export default function GabrielLinks() {
         </ShareFloating>
 
         {/* TOAST */}
-        {toastOpen && (
-          <Toast role="status" aria-live="polite">
+        {toastVisible && (
+          <Toast role="status" aria-live="polite" data-closing={toastClosing ? "true" : undefined}>
             <div>
-              <ToastTitle>{t.toastTitle}</ToastTitle>
-              <ToastText>{t.toastText}</ToastText>
+              <ToastTitle>{toastContent[toastType]?.title}</ToastTitle>
+              <ToastText>{toastContent[toastType]?.text}</ToastText>
             </div>
-            <ToastClose type="button" onClick={() => setToastOpen(false)} aria-label={t.ariaClose}>
-              ✕
-            </ToastClose>
+            <ToastClose type="button" onClick={closeToast} aria-label={t.ariaClose}>✕</ToastClose>
           </Toast>
         )}
       </Page>

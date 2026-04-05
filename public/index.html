@@ -7,17 +7,20 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="./icon.png" type="image/x-icon" />
 
-    <!-- Theme color (dark padrão; JS pode atualizar via meta[name=theme-color]) -->
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Theme color (atualizado dinamicamente via JS) -->
     <meta name="theme-color" content="#12001f" />
 
-    <!-- SEO básico -->
+    <!-- SEO -->
     <title>Gabriel Pereira — Founder @Guebly 💜</title>
     <meta name="description" content="Links oficiais de Gabriel Pereira — Founder & CEO da Guebly. Acesse o ecossistema, empresas do grupo e redes sociais." />
     <meta name="author" content="Gabriel Pereira" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://links.degabrielofi.com.br" />
 
-    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://links.degabrielofi.com.br" />
     <meta property="og:title" content="Gabriel Pereira — Founder @Guebly" />
@@ -32,6 +35,29 @@
     <meta name="twitter:description" content="Links oficiais — Guebly, site pessoal, redes e empresas do grupo." />
     <meta name="twitter:image" content="https://links.degabrielofi.com.br/icon.png" />
 
+    <!-- Schema.org — Person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Gabriel Pereira",
+      "jobTitle": "Founder & CEO",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Guebly",
+        "url": "https://guebly.com.br"
+      },
+      "url": "https://links.degabrielofi.com.br",
+      "email": "gabriel@guebly.com.br",
+      "sameAs": [
+        "https://github.com/degabrielofi",
+        "https://www.linkedin.com/in/degabrielofi/",
+        "https://www.instagram.com/degabrielofi_/",
+        "https://portfolio.degabrielofi.com.br"
+      ]
+    }
+    </script>
+
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,6 +68,11 @@
   </head>
 
   <body>
+    <noscript>
+      <div style="padding:2rem;text-align:center;font-family:sans-serif;color:#1a0a30">
+        <p>Ative o JavaScript para ver os links de Gabriel Pereira.</p>
+      </div>
+    </noscript>
     <div id="root"></div>
   </body>
 </html>
