@@ -41,7 +41,7 @@ import {
 } from "./style";
 
 import { HiOutlineMail, HiOutlineShare } from "react-icons/hi";
-import { FaGithub, FaLinkedinIn, FaInstagram, FaSun, FaMoon, FaArrowRight } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaInstagram, FaWhatsapp, FaSun, FaMoon, FaArrowRight } from "react-icons/fa";
 
 import { useTheme } from "../context/ThemeContext";
 import { useLocale } from "../context/LocaleContext";
@@ -265,6 +265,23 @@ export default function GabrielLinks() {
                     <div>
                       <LinkMain>{t.instagramMain}</LinkMain>
                       <LinkSub>{t.instagramSub}</LinkSub>
+                    </div>
+                  </LinkLeft>
+                  <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
+                </LinkRow>
+
+                <LinkRow
+                  href="https://wa.me/5511954544982"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={t.ariaWhatsapp}
+                  onClick={() => track("whatsapp", "WhatsApp")}
+                >
+                  <LinkLeft>
+                    <IconCircle aria-hidden="true"><FaWhatsapp /></IconCircle>
+                    <div>
+                      <LinkMain>{t.whatsappMain}</LinkMain>
+                      <LinkSub>{t.whatsappSub}</LinkSub>
                     </div>
                   </LinkLeft>
                   <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
