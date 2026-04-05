@@ -278,7 +278,7 @@ export default function GabrielLinks() {
                   onClick={() => track("whatsapp", "WhatsApp")}
                 >
                   <LinkLeft>
-                    <IconCircle aria-hidden="true"><FaWhatsapp /></IconCircle>
+                    <IconCircle aria-hidden="true" data-brand="whatsapp"><FaWhatsapp /></IconCircle>
                     <div>
                       <LinkMain>{t.whatsappMain}</LinkMain>
                       <LinkSub>{t.whatsappSub}</LinkSub>
@@ -340,7 +340,7 @@ export default function GabrielLinks() {
                 </CompanyHeroCard>
 
                 <CompanyHeroCard
-                  href="https://guebly.com.br"
+                  href="https://games.guebly.com.br"
                   target="_blank"
                   rel="noreferrer"
                   aria-label={t.ariaGames}

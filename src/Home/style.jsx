@@ -281,6 +281,7 @@ export const LinkRow = styled.a`
   &:nth-child(4) { animation-delay: 0.68s; }
   &:nth-child(5) { animation-delay: 0.74s; }
   &:nth-child(6) { animation-delay: 0.80s; }
+  &:nth-child(7) { animation-delay: 0.86s; }
 
   &:after {
     content: "";
@@ -341,6 +342,13 @@ export const IconCircle = styled.div`
   flex: 0 0 auto;
   transition: background 0.35s ease, border-color 0.35s ease;
   svg { opacity: 0.92; }
+
+  &[data-brand="whatsapp"] {
+    background: rgba(37,211,102,0.12);
+    border-color: rgba(37,211,102,0.28);
+    color: #25d366;
+    svg { opacity: 1; }
+  }
 `;
 
 export const LinkMain = styled.div`

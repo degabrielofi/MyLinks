@@ -42,6 +42,7 @@ export default function LazyImage({ src, alt, style, className, ...rest }) {
         src={src}
         alt={alt}
         $loaded={loaded}
+        loading="lazy"
         onLoad={() => setLoaded(true)}
         style={style}
         className={className}
