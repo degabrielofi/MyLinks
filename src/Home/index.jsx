@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ThemeTokens,
   Page,
+  PageGlow,
   Shell,
   TopHero,
   TopHeroImg,
@@ -60,16 +61,32 @@ import GamesHero from "../assets/games.png";
 
 export default function GabrielLinks() {
   const [toastOpen, setToastOpen] = useState(false);
+  const [fading, setFading] = useState(false);
   const { theme, toggle } = useTheme();
   const { t, locale, changeLocale } = useLocale();
+  const { track } = useAnalytics();
+  const prevLocale = useRef(locale);
 
   const localeOrder = ["pt", "en", "es", "it"];
+  const localeLabels = { pt: "PT", en: "EN", es: "ES", it: "IT" };
+  const localeTitles = { pt: "Português", en: "English", es: "Español", it: "Italiano" };
+
   function cycleLocale() {
     const next = localeOrder[(localeOrder.indexOf(locale) + 1) % localeOrder.length];
     changeLocale(next);
   }
-  const { track } = useAnalytics();
 
+  // Fade content on locale change
+  useEffect(() => {
+    if (prevLocale.current !== locale) {
+      setFading(true);
+      const timer = setTimeout(() => setFading(false), 150);
+      prevLocale.current = locale;
+      return () => clearTimeout(timer);
+    }
+  }, [locale]);
+
+  // Show toast only on first visit
   useEffect(() => {
     try {
       const visited = localStorage.getItem("mylinks-visited");
@@ -108,7 +125,9 @@ export default function GabrielLinks() {
     <>
       <ThemeTokens />
       <Page>
-        <Shell>
+        <PageGlow />
+
+        <Shell data-fade={fading ? "out" : "in"}>
           {/* HERO */}
           <TopHero>
             <TopHeroImg src={GueblyHero} alt="Guebly — banner do site" />
@@ -319,9 +338,9 @@ export default function GabrielLinks() {
           type="button"
           onClick={cycleLocale}
           aria-label="Mudar idioma"
-          title={locale === "pt" ? "Português" : locale === "en" ? "English" : locale === "es" ? "Español" : "Italiano"}
+          title={localeTitles[locale]}
         >
-          {locale === "pt" ? "PT" : locale === "en" ? "EN" : locale === "es" ? "ES" : "IT"}
+          {localeLabels[locale]}
         </LocaleToggle>
 
         {/* DARK/LIGHT TOGGLE */}

@@ -1,63 +1,63 @@
 import styled, { keyframes, createGlobalStyle } from "styled-components";
 
-/* ─── THEME TOKENS via CSS variables (set on :root[data-theme]) ─── */
+/* ─── THEME TOKENS via CSS variables ─── */
 export const ThemeTokens = createGlobalStyle`
   :root[data-theme="dark"], :root:not([data-theme]) {
-    --bg-page:       radial-gradient(900px 600px at 12% 10%, rgba(66,21,101,.62), transparent 55%),
-                     radial-gradient(900px 600px at 90% 70%, rgba(0,200,255,.16), transparent 55%),
-                     linear-gradient(180deg, #05000b 0%, #12001f 55%, #05000b 100%);
-    --bg-body:       #05000b;
-    --text-primary:  #ffffff;
-    --text-muted:    rgba(255,255,255,0.72);
-    --text-subtle:   rgba(255,255,255,0.55);
-    --panel-bg:      rgba(255,255,255,0.06);
-    --panel-border:  rgba(255,255,255,0.12);
-    --panel-links-bg:rgba(255,255,255,0.09);
-    --link-bg:       rgba(255,255,255,0.06);
-    --link-border:   rgba(255,255,255,0.12);
-    --link-hover-bg: rgba(255,255,255,0.08);
-    --icon-bg:       rgba(255,255,255,0.08);
-    --icon-border:   rgba(255,255,255,0.14);
-    --toast-bg:      rgba(0,0,0,0.58);
-    --toast-border:  rgba(255,255,255,0.14);
-    --share-bg:      rgba(255,255,255,0.12);
-    --share-border:  rgba(255,255,255,0.18);
-    --toggle-bg:     rgba(255,255,255,0.1);
-    --toggle-border: rgba(255,255,255,0.18);
-    --toggle-icon:   #fff;
-    --skeleton-base: rgba(255,255,255,0.08);
-    --skeleton-shine:rgba(255,255,255,0.14);
-    --accent:        #7b3fe4;
-    --accent-glow:   rgba(114,46,209,0.25);
+    --bg-page:               radial-gradient(900px 600px at 12% 10%, rgba(66,21,101,.62), transparent 55%),
+                             radial-gradient(900px 600px at 90% 70%, rgba(14,165,233,.18), transparent 55%),
+                             linear-gradient(180deg, #05000b 0%, #12001f 55%, #05000b 100%);
+    --bg-body:               #05000b;
+    --text-primary:          #ffffff;
+    --text-muted:            rgba(255,255,255,0.72);
+    --text-subtle:           rgba(255,255,255,0.55);
+    --panel-bg:              rgba(255,255,255,0.06);
+    --panel-border:          rgba(255,255,255,0.12);
+    --panel-links-bg:        rgba(255,255,255,0.09);
+    --link-bg:               rgba(255,255,255,0.06);
+    --link-border:           rgba(255,255,255,0.12);
+    --link-hover-bg:         rgba(255,255,255,0.08);
+    --icon-bg:               rgba(255,255,255,0.08);
+    --icon-border:           rgba(255,255,255,0.14);
+    --toast-bg:              rgba(0,0,0,0.58);
+    --toast-border:          rgba(255,255,255,0.14);
+    --toggle-bg:             rgba(255,255,255,0.1);
+    --toggle-border:         rgba(255,255,255,0.18);
+    --toggle-icon:           #fff;
+    --skeleton-base:         rgba(255,255,255,0.08);
+    --skeleton-shine:        rgba(255,255,255,0.14);
+    --accent:                #7b3fe4;
+    --accent-glow:           rgba(114,46,209,0.25);
+    --accent-secondary:      #0ea5e9;
+    --accent-secondary-glow: rgba(14,165,233,0.22);
   }
 
   :root[data-theme="light"] {
-    --bg-page:       radial-gradient(900px 600px at 12% 10%, rgba(180,140,255,.18), transparent 55%),
-                     radial-gradient(900px 600px at 90% 70%, rgba(0,180,255,.10), transparent 55%),
-                     linear-gradient(180deg, #f3eeff 0%, #ece5ff 55%, #f3eeff 100%);
-    --bg-body:       #f3eeff;
-    --text-primary:  #1a0a30;
-    --text-muted:    rgba(30,10,60,0.70);
-    --text-subtle:   rgba(30,10,60,0.45);
-    --panel-bg:      rgba(255,255,255,0.72);
-    --panel-border:  rgba(114,46,209,0.14);
-    --panel-links-bg:rgba(255,255,255,0.88);
-    --link-bg:       rgba(255,255,255,0.70);
-    --link-border:   rgba(114,46,209,0.14);
-    --link-hover-bg: rgba(255,255,255,0.95);
-    --icon-bg:       rgba(114,46,209,0.08);
-    --icon-border:   rgba(114,46,209,0.18);
-    --toast-bg:      rgba(255,255,255,0.88);
-    --toast-border:  rgba(114,46,209,0.18);
-    --share-bg:      rgba(255,255,255,0.75);
-    --share-border:  rgba(114,46,209,0.22);
-    --toggle-bg:     rgba(114,46,209,0.10);
-    --toggle-border: rgba(114,46,209,0.22);
-    --toggle-icon:   #6f2dbd;
-    --skeleton-base: rgba(114,46,209,0.07);
-    --skeleton-shine:rgba(114,46,209,0.14);
-    --accent:        #6f2dbd;
-    --accent-glow:   rgba(114,46,209,0.18);
+    --bg-page:               radial-gradient(900px 600px at 12% 10%, rgba(180,140,255,.18), transparent 55%),
+                             radial-gradient(900px 600px at 90% 70%, rgba(14,165,233,.10), transparent 55%),
+                             linear-gradient(180deg, #f3eeff 0%, #ece5ff 55%, #f3eeff 100%);
+    --bg-body:               #f3eeff;
+    --text-primary:          #1a0a30;
+    --text-muted:            rgba(30,10,60,0.70);
+    --text-subtle:           rgba(30,10,60,0.45);
+    --panel-bg:              rgba(255,255,255,0.72);
+    --panel-border:          rgba(114,46,209,0.14);
+    --panel-links-bg:        rgba(255,255,255,0.88);
+    --link-bg:               rgba(255,255,255,0.70);
+    --link-border:           rgba(114,46,209,0.14);
+    --link-hover-bg:         rgba(255,255,255,0.95);
+    --icon-bg:               rgba(114,46,209,0.08);
+    --icon-border:           rgba(114,46,209,0.18);
+    --toast-bg:              rgba(255,255,255,0.88);
+    --toast-border:          rgba(114,46,209,0.18);
+    --toggle-bg:             rgba(114,46,209,0.10);
+    --toggle-border:         rgba(114,46,209,0.22);
+    --toggle-icon:           #6f2dbd;
+    --skeleton-base:         rgba(114,46,209,0.07);
+    --skeleton-shine:        rgba(114,46,209,0.14);
+    --accent:                #6f2dbd;
+    --accent-glow:           rgba(114,46,209,0.18);
+    --accent-secondary:      #0284c7;
+    --accent-secondary-glow: rgba(2,132,199,0.15);
   }
 `;
 
@@ -72,8 +72,31 @@ const fadeIn = keyframes`
   to   { opacity: 1; }
 `;
 
+const bgDrift = keyframes`
+  0%   { opacity: 0.6; transform: translate(0, 0) scale(1); }
+  50%  { opacity: 1;   transform: translate(7%, -5%) scale(1.18); }
+  100% { opacity: 0.6; transform: translate(0, 0) scale(1); }
+`;
+
+/* ─── ANIMATED BACKGROUND GLOW (dark mode only) ─── */
+export const PageGlow = styled.div`
+  position: fixed;
+  top: -25%;
+  left: -20%;
+  width: 70%;
+  padding-bottom: 70%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(114,46,209,0.16) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  animation: ${bgDrift} 14s ease-in-out infinite;
+
+  :root[data-theme="light"] & { display: none; }
+`;
+
 /* ─── PAGE ─── */
 export const Page = styled.main`
+  position: relative;
   min-height: 100vh;
   color: var(--text-primary);
   background: var(--bg-page);
@@ -81,9 +104,14 @@ export const Page = styled.main`
 `;
 
 export const Shell = styled.div`
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
   padding: 1.2rem;
+  transition: opacity 0.15s ease;
+
+  &[data-fade="out"] { opacity: 0; }
 `;
 
 /* ─── HERO ─── */
@@ -111,7 +139,7 @@ export const TopHeroOverlay = styled.div`
   position: absolute;
   inset: 0;
   background: radial-gradient(900px 420px at 20% 20%, rgba(114,46,209,.28), transparent 60%),
-    radial-gradient(900px 420px at 85% 70%, rgba(0,200,255,.18), transparent 60%),
+    radial-gradient(600px 350px at 85% 70%, rgba(14,165,233,.18), transparent 60%),
     linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.62) 72%);
 `;
 
@@ -140,6 +168,7 @@ export const Avatar = styled.img`
   border: 2px solid rgba(114,46,209,0.9);
   box-shadow: 0 0 0 4px var(--accent-glow), 0 18px 60px rgba(114,46,209,0.35);
   flex: 0 0 auto;
+  animation: ${fadeUp} 0.55s 0.08s ease both;
 `;
 
 export const Headline = styled.h1`
@@ -148,6 +177,10 @@ export const Headline = styled.h1`
   letter-spacing: -0.9px;
   line-height: 1.05;
   color: #fff;
+
+  @media (min-width: 900px) {
+    font-size: 2.85rem;
+  }
 `;
 
 export const Subheadline = styled.p`
@@ -302,7 +335,7 @@ export const LinkMain = styled.div`
 export const LinkSub = styled.div`
   margin-top: 0.2rem;
   font-size: 0.82rem;
-  opacity: 0.66;
+  opacity: 0.78;
   color: inherit;
 `;
 
@@ -310,13 +343,14 @@ export const LinkArrow = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.85rem;
-  opacity: 0.65;
+  opacity: 0.75;
   color: inherit;
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transition: opacity 0.18s ease, transform 0.18s ease, color 0.18s ease;
 
   ${LinkRow}:hover & {
     opacity: 1;
     transform: translateX(3px);
+    color: var(--accent-secondary);
   }
 `;
 
@@ -342,13 +376,29 @@ export const CompanyHeroCard = styled.a`
   box-shadow: 0 22px 70px rgba(0,0,0,.3);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
+  /* Arrow indicator — always visible on mobile, stronger on hover */
+  &::after {
+    content: "↗";
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 0.85rem;
+    color: #fff;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+  }
+
   &:hover {
     transform: translateY(-3px);
     border-color: rgba(114,46,209,0.45);
     box-shadow: 0 28px 90px rgba(0,0,0,.4);
   }
 
+  &:hover::after { opacity: 1; transform: translate(2px, -2px); }
+
   &:active { transform: translateY(1px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
+  &:active::after { opacity: 0.5; transform: none; }
 
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
@@ -366,6 +416,7 @@ export const CompanyHeroOverlay = styled.div`
   position: absolute;
   inset: 0;
   background: radial-gradient(650px 320px at 18% 25%, rgba(114,46,209,.22), transparent 60%),
+    radial-gradient(400px 250px at 88% 18%, rgba(14,165,233,.14), transparent 60%),
     linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.84) 78%);
 `;
 
@@ -393,10 +444,12 @@ export const CompanyDesc = styled.div`
 /* ─── FOOTER ─── */
 export const Footer = styled.footer`
   text-align: center;
-  margin-top: 1.1rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--panel-border);
   color: var(--text-subtle);
-  font-size: 0.75rem;
-  transition: color 0.35s ease;
+  font-size: 0.8rem;
+  transition: color 0.35s ease, border-color 0.35s ease;
 `;
 
 /* ─── THEME TOGGLE ─── */
@@ -455,19 +508,20 @@ export const ShareFloating = styled.button`
   right: 18px;
   bottom: 18px;
   z-index: 25;
-  padding: 0.65rem 1rem;
+  height: 42px;
+  padding: 0 1rem;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--text-primary);
-  background: var(--share-bg);
-  border: 1px solid var(--share-border);
+  color: var(--toggle-icon);
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
   backdrop-filter: blur(12px);
   cursor: pointer;
-  box-shadow: 0 18px 60px rgba(0,0,0,.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,.25);
   transition: transform 0.18s ease, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 
   &:hover {
@@ -475,6 +529,7 @@ export const ShareFloating = styled.button`
     background: var(--link-hover-bg);
     border-color: rgba(114,46,209,0.35);
   }
+  &:active { transform: translateY(1px); }
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
