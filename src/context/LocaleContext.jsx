@@ -17,6 +17,7 @@ function detectLocale() {
   ).toLowerCase();
   if (lang.startsWith("pt")) return "pt";
   if (lang.startsWith("es")) return "es";
+  if (lang.startsWith("it")) return "it";
   return "en";
 }
 
@@ -24,7 +25,7 @@ export function LocaleProvider({ children }) {
   const [locale, setLocale] = useState(detectLocale);
 
   useEffect(() => {
-    const langMap = { pt: "pt-BR", en: "en", es: "es" };
+    const langMap = { pt: "pt-BR", en: "en", es: "es", it: "it" };
     document.documentElement.setAttribute("lang", langMap[locale] || "en");
   }, [locale]);
 

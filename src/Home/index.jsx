@@ -63,7 +63,7 @@ export default function GabrielLinks() {
   const { theme, toggle } = useTheme();
   const { t, locale, changeLocale } = useLocale();
 
-  const localeOrder = ["pt", "en", "es"];
+  const localeOrder = ["pt", "en", "es", "it"];
   function cycleLocale() {
     const next = localeOrder[(localeOrder.indexOf(locale) + 1) % localeOrder.length];
     changeLocale(next);
@@ -319,9 +319,9 @@ export default function GabrielLinks() {
           type="button"
           onClick={cycleLocale}
           aria-label="Mudar idioma"
-          title={locale === "pt" ? "Português" : locale === "en" ? "English" : "Español"}
+          title={locale === "pt" ? "Português" : locale === "en" ? "English" : locale === "es" ? "Español" : "Italiano"}
         >
-          {locale === "pt" ? "PT" : locale === "en" ? "EN" : "ES"}
+          {locale === "pt" ? "PT" : locale === "en" ? "EN" : locale === "es" ? "ES" : "IT"}
         </LocaleToggle>
 
         {/* DARK/LIGHT TOGGLE */}
