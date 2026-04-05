@@ -112,7 +112,7 @@ export const TopHeroOverlay = styled.div`
   inset: 0;
   background: radial-gradient(900px 420px at 20% 20%, rgba(114,46,209,.28), transparent 60%),
     radial-gradient(900px 420px at 85% 70%, rgba(0,200,255,.18), transparent 60%),
-    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.82) 72%);
+    linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.62) 72%);
 `;
 
 export const TopHeroContent = styled.div`
@@ -144,7 +144,7 @@ export const Avatar = styled.img`
 
 export const Headline = styled.h1`
   font-size: 2.25rem;
-  font-weight: 950;
+  font-weight: 900;
   letter-spacing: -0.9px;
   line-height: 1.05;
   color: #fff;
@@ -194,7 +194,7 @@ export const Panel = styled.div`
 
 export const PanelTitle = styled.h2`
   font-size: 1.05rem;
-  font-weight: 950;
+  font-weight: 900;
   letter-spacing: -0.2px;
   color: var(--text-primary);
   transition: color 0.35s ease;
@@ -257,6 +257,8 @@ export const LinkRow = styled.a`
 
   &:hover:after { transform: translateX(0%); opacity: 1; }
 
+  &:active { transform: translateY(1px); box-shadow: none; }
+
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
@@ -292,7 +294,7 @@ export const IconCircle = styled.div`
 `;
 
 export const LinkMain = styled.div`
-  font-weight: 950;
+  font-weight: 900;
   letter-spacing: -0.2px;
   color: inherit;
 `;
@@ -305,17 +307,29 @@ export const LinkSub = styled.div`
 `;
 
 export const LinkArrow = styled.div`
-  font-weight: 950;
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
   opacity: 0.65;
   color: inherit;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+
+  ${LinkRow}:hover & {
+    opacity: 1;
+    transform: translateX(3px);
+  }
 `;
 
 /* ─── COMPANIES ─── */
 export const CompaniesGrid = styled.div`
   margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const CompanyHeroCard = styled.a`
@@ -337,6 +351,8 @@ export const CompanyHeroCard = styled.a`
     border-color: rgba(114,46,209,0.45);
     box-shadow: 0 28px 90px rgba(0,0,0,.4);
   }
+
+  &:active { transform: translateY(1px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
 
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
@@ -364,7 +380,7 @@ export const CompanyHeroContent = styled.div`
 `;
 
 export const CompanyName = styled.div`
-  font-weight: 950;
+  font-weight: 900;
   letter-spacing: -0.2px;
   font-size: 1.05rem;
   color: #fff;
@@ -408,6 +424,7 @@ export const ThemeToggle = styled.button`
   transition: transform 0.18s ease, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 
   &:hover { transform: scale(1.1); }
+  &:active { transform: scale(0.92) rotate(18deg); }
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
@@ -417,10 +434,13 @@ export const ShareFloating = styled.button`
   right: 18px;
   bottom: 18px;
   z-index: 25;
-  padding: 0.65rem 0.9rem;
+  padding: 0.65rem 1rem;
   border-radius: 999px;
-  font-weight: 650;
+  font-weight: 600;
   font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--text-primary);
   background: var(--share-bg);
   border: 1px solid var(--share-border);
@@ -442,7 +462,7 @@ export const Toast = styled.div`
   position: fixed;
   left: 12px;
   right: 12px;
-  bottom: 18px;
+  bottom: 78px;
   max-width: 760px;
   margin: 0 auto;
   display: flex;
@@ -460,7 +480,7 @@ export const Toast = styled.div`
 `;
 
 export const ToastTitle = styled.div`
-  font-weight: 950;
+  font-weight: 900;
   letter-spacing: -0.2px;
   color: var(--text-primary);
   transition: color 0.35s ease;

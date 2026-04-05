@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ThemeTokens,
   Page,
@@ -38,10 +38,11 @@ import {
   ThemeToggle,
 } from "./style";
 
-import { HiOutlineMail } from "react-icons/hi";
-import { FaGithub, FaLinkedinIn, FaInstagram, FaSun, FaMoon } from "react-icons/fa";
+import { HiOutlineMail, HiOutlineShare } from "react-icons/hi";
+import { FaGithub, FaLinkedinIn, FaInstagram, FaSun, FaMoon, FaArrowRight } from "react-icons/fa";
 
 import { useTheme } from "../context/ThemeContext";
+import { useLocale } from "../context/LocaleContext";
 import { useAnalytics } from "../hooks/useAnalytics";
 import LazyImage from "../components/LazyImage";
 
@@ -59,34 +60,40 @@ import GamesHero from "../assets/games.png";
 export default function GabrielLinks() {
   const [toastOpen, setToastOpen] = useState(false);
   const { theme, toggle } = useTheme();
+  const { t } = useLocale();
   const { track } = useAnalytics();
 
   useEffect(() => {
-    setToastOpen(true);
-    const t = setTimeout(() => setToastOpen(false), 3500);
-    return () => clearTimeout(t);
+    try {
+      const visited = localStorage.getItem("mylinks-visited");
+      if (!visited) {
+        setToastOpen(true);
+        localStorage.setItem("mylinks-visited", "1");
+        const timer = setTimeout(() => setToastOpen(false), 3500);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      // localStorage unavailable
+    }
   }, []);
-
-  const shareData = useMemo(
-    () => ({
-      title: "Gabriel Pereira",
-      text: "Links oficiais — Gabriel Pereira",
-      url: window.location.href,
-    }),
-    []
-  );
 
   async function handleShare() {
     track("share_button", "Compartilhar");
+    const shareData = {
+      title: "Gabriel Pereira",
+      text: "Links oficiais — Gabriel Pereira",
+      url: window.location.href,
+    };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
       } else {
         await navigator.clipboard.writeText(shareData.url);
         setToastOpen(true);
+        setTimeout(() => setToastOpen(false), 3500);
       }
     } catch {
-      setToastOpen(true);
+      // user cancelled or clipboard failed
     }
   }
 
@@ -104,10 +111,8 @@ export default function GabrielLinks() {
               <Avatar src={Profile} alt="Foto de Gabriel Pereira" />
               <div>
                 <Headline>Gabriel Pereira</Headline>
-                <Subheadline>Founder & CEO @ Guebly</Subheadline>
-                <MiniIntro>
-                  Construo produtos digitais e marcas que viram negócio.
-                </MiniIntro>
+                <Subheadline>{t.subheadline}</Subheadline>
+                <MiniIntro>{t.miniIntro}</MiniIntro>
               </div>
             </TopHeroContent>
           </TopHero>
@@ -115,8 +120,8 @@ export default function GabrielLinks() {
           <Layout>
             {/* LINKS */}
             <Panel data-variant="links">
-              <PanelTitle>Links</PanelTitle>
-              <PanelText>Escolhe e entra. Direto ao ponto.</PanelText>
+              <PanelTitle>{t.linksTitle}</PanelTitle>
+              <PanelText>{t.linksText}</PanelText>
 
               <LinkList>
                 <LinkRow
@@ -124,39 +129,39 @@ export default function GabrielLinks() {
                   target="_blank"
                   rel="noreferrer"
                   data-variant="primary"
-                  aria-label="Guebly Holding — Ecossistema, produtos e visão"
+                  aria-label={t.ariaHolding}
                   onClick={() => track("guebly_holding", "Guebly Holding")}
                 >
                   <LinkLeft>
                     <LinkIconImg src={HoldingIcon} alt="" aria-hidden="true" />
                     <div>
-                      <LinkMain>Guebly Holding</LinkMain>
-                      <LinkSub>Ecossistema, produtos e visão</LinkSub>
+                      <LinkMain>{t.holdingMain}</LinkMain>
+                      <LinkSub>{t.holdingSub}</LinkSub>
                     </div>
                   </LinkLeft>
-                  <LinkArrow aria-hidden="true">→</LinkArrow>
+                  <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
                 </LinkRow>
 
                 <LinkRow
                   href="https://portfolio.degabrielofi.com.br"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Site pessoal — Projetos e presença profissional"
+                  aria-label={t.ariaPersonal}
                   onClick={() => track("site_pessoal", "Site pessoal")}
                 >
                   <LinkLeft>
                     <LinkIconImg src={PersonalIcon} alt="" aria-hidden="true" />
                     <div>
-                      <LinkMain>Site pessoal</LinkMain>
-                      <LinkSub>Projetos e presença profissional</LinkSub>
+                      <LinkMain>{t.personalMain}</LinkMain>
+                      <LinkSub>{t.personalSub}</LinkSub>
                     </div>
                   </LinkLeft>
-                  <LinkArrow aria-hidden="true">→</LinkArrow>
+                  <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
                 </LinkRow>
 
                 <LinkRow
                   href="mailto:contato@degabrielofi.com.br"
-                  aria-label="Email profissional — contato@degabrielofi.com.br"
+                  aria-label={t.ariaEmail}
                   onClick={() => track("email", "Email profissional")}
                 >
                   <LinkLeft>
@@ -164,18 +169,18 @@ export default function GabrielLinks() {
                       <HiOutlineMail />
                     </IconCircle>
                     <div>
-                      <LinkMain>Email profissional</LinkMain>
-                      <LinkSub>contato@degabrielofi.com.br</LinkSub>
+                      <LinkMain>{t.emailMain}</LinkMain>
+                      <LinkSub>{t.emailSub}</LinkSub>
                     </div>
                   </LinkLeft>
-                  <LinkArrow aria-hidden="true">→</LinkArrow>
+                  <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
                 </LinkRow>
 
                 <LinkRow
                   href="https://github.com/degabrielofi"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="GitHub — Código e repositórios"
+                  aria-label={t.ariaGithub}
                   onClick={() => track("github", "GitHub")}
                 >
                   <LinkLeft>
@@ -183,18 +188,18 @@ export default function GabrielLinks() {
                       <FaGithub />
                     </IconCircle>
                     <div>
-                      <LinkMain>GitHub</LinkMain>
-                      <LinkSub>Código e repositórios</LinkSub>
+                      <LinkMain>{t.githubMain}</LinkMain>
+                      <LinkSub>{t.githubSub}</LinkSub>
                     </div>
                   </LinkLeft>
-                  <LinkArrow aria-hidden="true">→</LinkArrow>
+                  <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
                 </LinkRow>
 
                 <LinkRow
                   href="https://www.linkedin.com/in/degabrielofi/"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="LinkedIn — Negócios e posicionamento"
+                  aria-label={t.ariaLinkedin}
                   onClick={() => track("linkedin", "LinkedIn")}
                 >
                   <LinkLeft>
@@ -202,18 +207,18 @@ export default function GabrielLinks() {
                       <FaLinkedinIn />
                     </IconCircle>
                     <div>
-                      <LinkMain>LinkedIn</LinkMain>
-                      <LinkSub>Negócios e posicionamento</LinkSub>
+                      <LinkMain>{t.linkedinMain}</LinkMain>
+                      <LinkSub>{t.linkedinSub}</LinkSub>
                     </div>
                   </LinkLeft>
-                  <LinkArrow aria-hidden="true">→</LinkArrow>
+                  <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
                 </LinkRow>
 
                 <LinkRow
                   href="https://www.instagram.com/degabrielofi_/"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Instagram — Bastidores e construção"
+                  aria-label={t.ariaInstagram}
                   onClick={() => track("instagram", "Instagram")}
                 >
                   <LinkLeft>
@@ -221,33 +226,33 @@ export default function GabrielLinks() {
                       <FaInstagram />
                     </IconCircle>
                     <div>
-                      <LinkMain>Instagram</LinkMain>
-                      <LinkSub>Bastidores e construção</LinkSub>
+                      <LinkMain>{t.instagramMain}</LinkMain>
+                      <LinkSub>{t.instagramSub}</LinkSub>
                     </div>
                   </LinkLeft>
-                  <LinkArrow aria-hidden="true">→</LinkArrow>
+                  <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
                 </LinkRow>
               </LinkList>
             </Panel>
 
             {/* EMPRESAS */}
             <Panel data-variant="companies">
-              <PanelTitle>Empresas do grupo Guebly</PanelTitle>
-              <PanelText>Marcas criadas e operadas dentro da Guebly.</PanelText>
+              <PanelTitle>{t.companiesTitle}</PanelTitle>
+              <PanelText>{t.companiesText}</PanelText>
 
               <CompaniesGrid>
                 <CompanyHeroCard
                   href="https://studio.guebly.com.br"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Guebly Studio — Branding, Design e Websites"
+                  aria-label={t.ariaStudio}
                   onClick={() => track("guebly_studio", "Guebly Studio")}
                 >
                   <LazyImage src={StudioHero} alt="Guebly Studio" style={{ position: "absolute", inset: 0, transform: "scale(1.02)" }} />
                   <CompanyHeroOverlay />
                   <CompanyHeroContent>
                     <CompanyName>Guebly Studio</CompanyName>
-                    <CompanyDesc>Branding • Design • Websites</CompanyDesc>
+                    <CompanyDesc>{t.studioDesc}</CompanyDesc>
                   </CompanyHeroContent>
                 </CompanyHeroCard>
 
@@ -255,14 +260,14 @@ export default function GabrielLinks() {
                   href="https://contabil.guebly.com.br"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Guebly Contábil — Contabilidade + automação"
+                  aria-label={t.ariaContabil}
                   onClick={() => track("guebly_contabil", "Guebly Contábil")}
                 >
                   <LazyImage src={ContabilHero} alt="Guebly Contábil" style={{ position: "absolute", inset: 0, transform: "scale(1.02)" }} />
                   <CompanyHeroOverlay />
                   <CompanyHeroContent>
                     <CompanyName>Guebly Contábil</CompanyName>
-                    <CompanyDesc>Contabilidade + automação</CompanyDesc>
+                    <CompanyDesc>{t.contabilDesc}</CompanyDesc>
                   </CompanyHeroContent>
                 </CompanyHeroCard>
 
@@ -270,14 +275,14 @@ export default function GabrielLinks() {
                   href="https://pay.guebly.com.br"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Guebly Pay — Checkout, PIX e Cartão"
+                  aria-label={t.ariaPay}
                   onClick={() => track("guebly_pay", "Guebly Pay")}
                 >
                   <LazyImage src={PayHero} alt="Guebly Pay" style={{ position: "absolute", inset: 0, transform: "scale(1.02)" }} />
                   <CompanyHeroOverlay />
                   <CompanyHeroContent>
                     <CompanyName>Guebly Pay</CompanyName>
-                    <CompanyDesc>Checkout • PIX • Cartão</CompanyDesc>
+                    <CompanyDesc>{t.payDesc}</CompanyDesc>
                   </CompanyHeroContent>
                 </CompanyHeroCard>
 
@@ -285,46 +290,47 @@ export default function GabrielLinks() {
                   href="https://guebly.com.br"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Guebly Games — Direto pelo site da Guebly"
+                  aria-label={t.ariaGames}
                   onClick={() => track("guebly_games", "Guebly Games")}
                 >
                   <LazyImage src={GamesHero} alt="Guebly Games" style={{ position: "absolute", inset: 0, transform: "scale(1.02)" }} />
                   <CompanyHeroOverlay />
                   <CompanyHeroContent>
                     <CompanyName>Guebly Games</CompanyName>
-                    <CompanyDesc>Direto pelo site da Guebly</CompanyDesc>
+                    <CompanyDesc>{t.gamesDesc}</CompanyDesc>
                   </CompanyHeroContent>
                 </CompanyHeroCard>
               </CompaniesGrid>
             </Panel>
           </Layout>
 
-          <Footer>© {new Date().getFullYear()} — Gabriel Pereira</Footer>
+          <Footer>© {new Date().getFullYear()} — {t.footer}</Footer>
         </Shell>
 
         {/* DARK/LIGHT TOGGLE */}
         <ThemeToggle
           type="button"
           onClick={toggle}
-          aria-label={theme === "dark" ? "Mudar para modo claro" : "Mudar para modo escuro"}
-          title={theme === "dark" ? "Modo claro" : "Modo escuro"}
+          aria-label={theme === "dark" ? t.ariaThemeLight : t.ariaThemeDark}
+          title={theme === "dark" ? t.ariaThemeLight : t.ariaThemeDark}
         >
           {theme === "dark" ? <FaSun /> : <FaMoon />}
         </ThemeToggle>
 
         {/* SHARE */}
-        <ShareFloating type="button" onClick={handleShare} aria-label="Compartilhar página">
-          Compartilhar
+        <ShareFloating type="button" onClick={handleShare} aria-label={t.ariaShare}>
+          <HiOutlineShare aria-hidden="true" />
+          {t.share}
         </ShareFloating>
 
         {/* TOAST */}
         {toastOpen && (
           <Toast role="status" aria-live="polite">
             <div>
-              <ToastTitle>Bem-vindo 👋</ToastTitle>
-              <ToastText>Escolhe um link e entra direto.</ToastText>
+              <ToastTitle>{t.toastTitle}</ToastTitle>
+              <ToastText>{t.toastText}</ToastText>
             </div>
-            <ToastClose type="button" onClick={() => setToastOpen(false)} aria-label="Fechar notificação">
+            <ToastClose type="button" onClick={() => setToastOpen(false)} aria-label={t.ariaClose}>
               ✕
             </ToastClose>
           </Toast>
