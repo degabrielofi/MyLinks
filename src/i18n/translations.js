@@ -44,7 +44,7 @@ const translations = {
     ariaContabil: "Guebly Contábil — Contabilidade + automação",
     ariaPay: "Guebly Pay — Checkout, PIX e Cartão",
     ariaGames: "Guebly Games — Games e entretenimento digital",
-    footer: "Gabriel Pereira",
+    footer: "@degabrielofi",
   },
   en: {
     subheadline: "Founder & CEO @ Guebly",
@@ -91,7 +91,7 @@ const translations = {
     ariaContabil: "Guebly Contábil — Accounting + automation",
     ariaPay: "Guebly Pay — Checkout, PIX and Card",
     ariaGames: "Guebly Games — Games and digital entertainment",
-    footer: "Gabriel Pereira",
+    footer: "@degabrielofi",
   },
   es: {
     subheadline: "Founder & CEO @ Guebly",
@@ -138,7 +138,7 @@ const translations = {
     ariaContabil: "Guebly Contábil — Contabilidad + automatización",
     ariaPay: "Guebly Pay — Checkout, PIX y Tarjeta",
     ariaGames: "Guebly Games — Juegos y entretenimiento digital",
-    footer: "Gabriel Pereira",
+    footer: "@degabrielofi",
   },
   it: {
     subheadline: "Founder & CEO @ Guebly",
@@ -185,7 +185,7 @@ const translations = {
     ariaContabil: "Guebly Contábil — Contabilità + automazione",
     ariaPay: "Guebly Pay — Checkout, PIX e Carta",
     ariaGames: "Guebly Games — Giochi e intrattenimento digitale",
-    footer: "Gabriel Pereira",
+    footer: "@degabrielofi",
   },
 };
 
