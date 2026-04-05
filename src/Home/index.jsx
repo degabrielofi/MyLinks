@@ -36,6 +36,7 @@ import {
   ToastClose,
   ShareFloating,
   ThemeToggle,
+  LocaleToggle,
 } from "./style";
 
 import { HiOutlineMail, HiOutlineShare } from "react-icons/hi";
@@ -60,7 +61,13 @@ import GamesHero from "../assets/games.png";
 export default function GabrielLinks() {
   const [toastOpen, setToastOpen] = useState(false);
   const { theme, toggle } = useTheme();
-  const { t } = useLocale();
+  const { t, locale, changeLocale } = useLocale();
+
+  const localeOrder = ["pt", "en", "es"];
+  function cycleLocale() {
+    const next = localeOrder[(localeOrder.indexOf(locale) + 1) % localeOrder.length];
+    changeLocale(next);
+  }
   const { track } = useAnalytics();
 
   useEffect(() => {
@@ -160,7 +167,7 @@ export default function GabrielLinks() {
                 </LinkRow>
 
                 <LinkRow
-                  href="mailto:contato@degabrielofi.com.br"
+                  href="mailto:gabriel@guebly.com.br"
                   aria-label={t.ariaEmail}
                   onClick={() => track("email", "Email profissional")}
                 >
@@ -170,7 +177,7 @@ export default function GabrielLinks() {
                     </IconCircle>
                     <div>
                       <LinkMain>{t.emailMain}</LinkMain>
-                      <LinkSub>{t.emailSub}</LinkSub>
+                      <LinkSub>gabriel@guebly.com.br</LinkSub>
                     </div>
                   </LinkLeft>
                   <LinkArrow aria-hidden="true"><FaArrowRight /></LinkArrow>
@@ -306,6 +313,16 @@ export default function GabrielLinks() {
 
           <Footer>© {new Date().getFullYear()} — {t.footer}</Footer>
         </Shell>
+
+        {/* LOCALE TOGGLE */}
+        <LocaleToggle
+          type="button"
+          onClick={cycleLocale}
+          aria-label="Mudar idioma"
+          title={locale === "pt" ? "Português" : locale === "en" ? "English" : "Español"}
+        >
+          {locale === "pt" ? "PT" : locale === "en" ? "EN" : "ES"}
+        </LocaleToggle>
 
         {/* DARK/LIGHT TOGGLE */}
         <ThemeToggle

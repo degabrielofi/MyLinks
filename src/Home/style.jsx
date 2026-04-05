@@ -323,13 +323,9 @@ export const LinkArrow = styled.div`
 /* ─── COMPANIES ─── */
 export const CompaniesGrid = styled.div`
   margin-top: 1rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-
-  @media (max-width: 560px) {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
 `;
 
 export const CompanyHeroCard = styled.a`
@@ -425,6 +421,31 @@ export const ThemeToggle = styled.button`
 
   &:hover { transform: scale(1.1); }
   &:active { transform: scale(0.92) rotate(18deg); }
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+`;
+
+/* ─── LOCALE TOGGLE ─── */
+export const LocaleToggle = styled.button`
+  position: fixed;
+  left: 70px;
+  bottom: 18px;
+  z-index: 25;
+  padding: 0 0.75rem;
+  height: 42px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.3px;
+  color: var(--toggle-icon);
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0,0,0,.25);
+  transition: transform 0.18s ease, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+
+  &:hover { transform: scale(1.06); }
+  &:active { transform: scale(0.94); }
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 `;
 
