@@ -308,6 +308,11 @@ export const LinkRow = styled.a`
     background: var(--link-hover-bg);
   }
 
+  &[data-variant="primary"]:hover {
+    background: linear-gradient(135deg, #521870, #7b3fe4);
+    color: #fff;
+  }
+
   &:hover:after { transform: translateX(0%); opacity: 1; }
   &:active { transform: translateY(1px); box-shadow: none; }
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
