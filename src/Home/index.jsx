@@ -51,7 +51,7 @@ import LazyImage from "../components/LazyImage";
 import Profile from "../assets/profile.png";
 import GueblyHero from "../assets/guebly.png";
 import HoldingIcon from "../assets/icons/holding.png";
-import PersonalIcon from "../assets/icons/degabrielofi.png";
+import PersonalIcon from "../assets/icons/degabriel.png";
 import StudioHero from "../assets/studio.png";
 import ContabilHero from "../assets/contabil.png";
 import PayHero from "../assets/pay.png";
